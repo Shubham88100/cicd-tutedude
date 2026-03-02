@@ -12,8 +12,10 @@ pipeline {
 
         stage("Go to Flask Folder") {
             steps {
-                dir("flask-backend")
+                dir("flask-backend") {
                 sh "pip3 install -r requirements.txt"
+
+                }
             }
         }
 
