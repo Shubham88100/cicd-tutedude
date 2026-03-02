@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
     <title>express-frontend</title>
 </head>
 <body>
-    <p>Hello from express!!!</p>    
+    <p>Hello from express</p>    
 </body>
 <style>
     body {
