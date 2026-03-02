@@ -1,0 +1,30 @@
+pipeline {
+    agent any 
+
+    Stages {
+        
+        stage("Clone code") {
+            steps {
+                git "https://github.com/Shubham88100/cicd-tutedude.git"
+
+            }
+        }
+
+        stage("Go to Flask Folder") {
+            steps {
+                dir("flask-backend")
+                sh "pip3 install -r requirements.txt"
+            }
+        }
+
+        stage("Deploy flask") {
+            steps {
+                dir("flask-backend") {
+                    sh '''
+                    pm2 restart flask-app || pm2 start app.py --name flask-app --interpreter python3
+                    '''
+                }
+            }
+        }
+    }
+}

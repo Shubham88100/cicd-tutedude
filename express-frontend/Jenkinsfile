@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage("Clone code") {
+            steps {
+                git "https://github.com/Shubham88100/cicd-tutedude.git"
+            }
+        }
+
+        stage("Go to Express Folder") {
+            steps {
+                dir ("express-frontend") {
+                    sh "npm install"
+                }
+            }
+        }
+
+        stage("Deploy Express") {
+            steps {
+                dir("express-frontend") {
+                    sh '''
+                    pm2 restart express-app || pm2 start app.js --name express-app
+                    '''
+                }
+            }
+        }
+    }
+}
